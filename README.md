@@ -16,7 +16,9 @@ Endpoints will be available at http://localhost:3000/api All endpoints are GET a
 
 ## Endpoints
 
-**GET /api/noise** : Returns 2D [simplex noise](https://en.wikipedia.org/wiki/Simplex_noise) in the range \[0,1\) with octave combinations and peaks and valleys accentuated by a sigmoid function S(x) = 2x / (1 + |x|)
+### GET /api/noise
+
+Returns 2D [simplex noise](https://en.wikipedia.org/wiki/Simplex_noise) in the range \[0,1\) with octave combinations and peaks and valleys accentuated by a sigmoid function S(x) = 2x / (1 + |x|)
 
 **Required Parameters**
 
