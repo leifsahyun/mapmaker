@@ -9,7 +9,10 @@ With Node.js and npm installed run:
 ```bash
 npm run dev
 # or
-yarn dev
+next dev
+# or
+docker build -t mapmaker .
+docker run -p 3000:3000 mapmaker
 ```
 
 Endpoints will be available at http://localhost:3000/api All endpoints are GET and take parameters as query string encoded values. They can return either a PNG image of the map generated or a 2D JS float array representing the grayscale of the image.
