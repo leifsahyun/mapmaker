@@ -1,8 +1,9 @@
 import { createNoise2D } from 'simplex-noise';
 import alea from 'alea';
-import jimp from 'jimp';
+import { convertToImage, convertToBuffer } from '../../util/image_utils.js'
 
 const base_seed = 'seed';
+const image_types = ['image/png', 'image/jpeg', 'image/bmp'];
 
 export default function noise(req, res) {
 	// Required params
@@ -19,12 +20,15 @@ export default function noise(req, res) {
 	var freq = Number(req.query['freq']);
 	var octaves = Number(req.query['octaves']);
 	var seed = req.query['seed'];
+	var return_type = req.query['type'];
 	if(!freq)
 		freq = 0.005;
 	if(!octaves)
 		octaves = 1;
 	if(!seed)
 		seed = base_seed;
+	if(!return_type)
+		return_type = 'data';
 	
 	// Create octaves
 	var noise = [];
@@ -34,10 +38,9 @@ export default function noise(req, res) {
 	}
 	
 	// Generate data
-	var buf = Buffer.alloc(4 * width * height);
-	for (var y = 0; y < height; y++) {
-		for (var x = 0; x < width; x++) {
-			var idx = 4 * (y*width + x);
+	var data = Array(width).fill().map(() => Array(height).fill(0));
+	for (var x = 0; x < width; x++) {
+		for (var y = 0; y < height; y++) {
 			var value = 0;
 			// Sum octave data
 			for (var i = 0; i < octaves; i++)
@@ -48,17 +51,25 @@ export default function noise(req, res) {
 			// Adjust for extra range from octave addition
 			value = value / (2 - (0.5 ** (octaves-1)));
 			// Accentuate peaks and valleys
-			value = 2*value / (1 + Math.abs(value));
+			value = value / (1 + Math.abs(value)) + 0.5;
 			// Set data in buffer
-			buf[idx] = buf[idx+1] = buf[idx+2] = buf[idx+3] = Math.floor(128+128*value);
+			data[x][y] = value;
 		}
 	}
 	
 	// Build response image
-	new jimp({data: buf, width: width, height: height}, (err, image) => {
-		if(err) throw err;
-		image.getBuffer(jimp.MIME_PNG, (err, resultBuffer) => {
-			res.setHeader('Content-Type', 'image/png').send(resultBuffer);
+	if (image_types.includes(return_type))
+	{
+		convertToImage(data, (image) => {
+			image.getBuffer(return_type, (err, resultBuffer) => {
+				res.setHeader('Content-Type', return_type).send(resultBuffer);
+			});
 		});
-	});
+	}
+	else
+	{
+		convertToBuffer(data, (buffer) => {
+			res.send(buffer);
+		});
+	}
 }

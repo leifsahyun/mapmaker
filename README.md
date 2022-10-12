@@ -15,13 +15,13 @@ docker build -t mapmaker .
 docker run -p 3000:3000 mapmaker
 ```
 
-Endpoints will be available at http://localhost:3000/api All endpoints are GET and take parameters as query string encoded values. They can return either a PNG image of the map generated or a 2D JS float array representing the grayscale of the image.
+Endpoints will be available at http://localhost:3000/api All endpoints are GET and take parameters as query string encoded values. They can return either a bmp, png, or jpeg image of the map generated or a big-endian, row-major buffer of JS double values representing the grayscale of the image.
 
 ## Endpoints
 
 ### GET /api/noise
 
-Returns 2D [simplex noise](https://en.wikipedia.org/wiki/Simplex_noise) in the range \[0,1\) with octave combinations and peaks and valleys accentuated by a sigmoid function S(x) = 2x / (1 + |x|)
+Returns 2D [simplex noise](https://en.wikipedia.org/wiki/Simplex_noise) in the range \[0,1\) with octave combinations and peaks and valleys accentuated by a sigmoid function S(x) = x / (1 + |x|)
 
 **Required Parameters**
 
@@ -40,4 +40,6 @@ freq float : Frequency of noise. Default value 0.005
 octaves int : Number of octaves of noise to combine in result. Each octave added to the base has twice the frequency and half the magnitude of the previous one. Default value 1
 
 seed string : Noise randomness seed. Default value 'seed'
+
+type string : Mime type of image to return. Type must be url encoded as a parameter, replacing '/' with '%2F'. 'data', 'buffer' or unsupported types will return a buffer of doubles describing the noise. Supported image types are image/bmp, image/png, image/jpeg. Default value 'data'
 
