@@ -16,14 +16,23 @@ Endpoints will be available at http://localhost:3000/api All endpoints are GET a
 
 ## Endpoints
 
-*GET /api/noise* : Returns 2D [simplex noise](https://en.wikipedia.org/wiki/Simplex_noise) in the range \[0,1\) with octave combinations and peaks and valleys accentuated by a sigmoid function S(x) = 2x / (1 + |x|)
-*Required Parameters*
+**GET /api/noise** : Returns 2D [simplex noise](https://en.wikipedia.org/wiki/Simplex_noise) in the range \[0,1\) with octave combinations and peaks and valleys accentuated by a sigmoid function S(x) = 2x / (1 + |x|)
+
+**Required Parameters**
+
 x int : X-coordinate of top-left corner of noise
+
 y int : Y-coordinate of top-left corner of noise
+
 width int : Width of noise in pixels
+
 height int : Height of noise in pixels
-*Optional Parameters*
+
+**Optional Parameters**
+
 freq float : Frequency of noise. Default value 0.005
+
 octaves int : Number of octaves of noise to combine in result. Each octave added to the base has twice the frequency and half the magnitude of the previous one. Default value 1
+
 seed string : Noise randomness seed. Default value 'seed'
 
