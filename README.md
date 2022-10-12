@@ -41,5 +41,5 @@ octaves int : Number of octaves of noise to combine in result. Each octave added
 
 seed string : Noise randomness seed. Default value 'seed'
 
-type string : Mime type of image to return. Type must be url encoded as a parameter, replacing '/' with '%2F'. 'data', 'buffer' or unsupported types will return a buffer of doubles describing the noise. Supported image types are image/bmp, image/png, image/jpeg. Default value 'data'
+type string : Mime type of image to return. Type must be url encoded as a parameter, replacing '/' with '%2F'. 'data', 'buffer' or unsupported types will return an application/octet-stream of doubles describing the noise. Supported image types are image/bmp, image/png, image/jpeg. Default value 'data'
 

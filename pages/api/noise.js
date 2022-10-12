@@ -69,7 +69,7 @@ export default function noise(req, res) {
 	else
 	{
 		convertToBuffer(data, (buffer) => {
-			res.send(buffer);
+			res.setHeader('Content-Type', 'application/octet-stream').send(buffer);
 		});
 	}
 }
