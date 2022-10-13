@@ -17,6 +17,11 @@ docker run -p 3000:3000 mapmaker
 
 Endpoints will be available at http://localhost:3000/api All endpoints are GET and take parameters as query string encoded values. They can return either a bmp, png, or jpeg image of the map generated or a big-endian, row-major buffer of JS double values representing the grayscale of the image.
 
+## Deployment Button
+
+I like this Google Cloud Run deployment button I've encountered, so I'm including it here and likely in future repos:
+[![Run on Google Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run/?git_repo=https://github.com/leifsahyun/mapmaker.git)
+
 ## Endpoints
 
 ### GET /api/noise
