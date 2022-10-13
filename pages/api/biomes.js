@@ -1,4 +1,4 @@
-import {convertFromBuffer, createColorImage, combineGrayscaleArrays, convertToBuffer} from '../../util/image_utils.js'
+import {convertFromBuffer, createColorImage, averageGrayscaleArrays, convertToBuffer} from '../../util/image_utils.js'
 import fetch from 'node-fetch';
 
 const base_seed = 'seed';
@@ -12,7 +12,7 @@ async function getChannel(channel, x, y, width, height)
 	return convertFromBuffer(buf, width, height);
 }
 
-export default async function noise(req, res) {
+export default async function biomes(req, res) {
 	// Optional params
 	var x0 = Number(req.query['x']) || 0;
 	var y0 = Number(req.query['y']) || 0;
@@ -51,7 +51,7 @@ export default async function noise(req, res) {
 	}
 	else
 	{
-		var result = combineGrayscaleArrays(combineGrayscaleArrays(r, g), b, 0.33);
+		var result = averageGrayscaleArrays(averageGrayscaleArrays(r, g), b, 0.33);
 		convertToBuffer(result, (buffer) => {
 			res.setHeader('Content-Type', 'application/octet-stream').send(buffer);
 		});

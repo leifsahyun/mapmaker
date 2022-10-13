@@ -44,7 +44,7 @@ export function convertFromBuffer(buffer, width, height) {
 	return data;
 }
 
-export function combineGrayscaleArrays(arr1, arr2, adjustmentFactor = 1) {
+export function averageGrayscaleArrays(arr1, arr2, adjustmentFactor = 1) {
 	if (!Array.isArray(arr1) || !Array.isArray(arr1[0]) || !Array.isArray(arr2) || !Array.isArray(arr2[0]) )
 		throw 'Objects to combine must be 2D Arrays';
 	var width = arr1.length;

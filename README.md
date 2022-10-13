@@ -61,3 +61,20 @@ seed string : Noise randomness seed. Default value 'seed'
 
 type string : Mime type of image to return. Type must be url encoded as a parameter, replacing '/' with '%2F'. 'data', 'buffer' or unsupported types will return an application/octet-stream of doubles describing the noise. Supported image types are image/bmp, image/png, image/jpeg. Default value 'data'
 
+### GET /api/rivers
+
+Simulates drainage over an area to produce a map of rivers and lakes. Traces flow from rainfall in each pixel downhill until a minima is reached to produce river traces. When returning a data stream, rivers and lakes are returned separately. Call with type='lakes' or 'saturation' to get lake data; anything else returns river data.
+
+**Optional Parameters**
+
+x int : X-coordinate of top-left corner of noise. Default value 0
+
+y int : Y-coordinate of top-left corner of noise. Default value 0
+
+width int : Width of noise in pixels. Default value 500
+
+height int : Height of noise in pixels. Default value 500
+
+seed string : Noise randomness seed. Default value 'seed'
+
+type string : Mime type of image to return. Type must be url encoded as a parameter, replacing '/' with '%2F'. 'data', 'buffer' or unsupported types will return an application/octet-stream of doubles describing the noise. Supported image types are image/bmp, image/png, image/jpeg. Calling with 'lakes' will return a stream of lake data. Default value 'data'.
