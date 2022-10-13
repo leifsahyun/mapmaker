@@ -43,3 +43,21 @@ seed string : Noise randomness seed. Default value 'seed'
 
 type string : Mime type of image to return. Type must be url encoded as a parameter, replacing '/' with '%2F'. 'data', 'buffer' or unsupported types will return an application/octet-stream of doubles describing the noise. Supported image types are image/bmp, image/png, image/jpeg. Default value 'data'
 
+### GET /api/biomes
+
+Returns a section of map with biome coloration. Drier areas are redder, wetter areas are greener, higher up areas are lighter, lower down areas are darker, and there are lakes.
+
+**Optional Parameters**
+
+x int : X-coordinate of top-left corner of noise. Default value 0
+
+y int : Y-coordinate of top-left corner of noise. Default value 0
+
+width int : Width of noise in pixels. Default value 500
+
+height int : Height of noise in pixels. Default value 500
+
+seed string : Noise randomness seed. Default value 'seed'
+
+type string : Mime type of image to return. Type must be url encoded as a parameter, replacing '/' with '%2F'. 'data', 'buffer' or unsupported types will return an application/octet-stream of doubles describing the noise. Supported image types are image/bmp, image/png, image/jpeg. Default value 'data'
+
