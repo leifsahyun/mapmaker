@@ -78,3 +78,21 @@ height int : Height of noise in pixels. Default value 500
 seed string : Noise randomness seed. Default value 'seed'
 
 type string : Mime type of image to return. Type must be url encoded as a parameter, replacing '/' with '%2F'. 'data', 'buffer' or unsupported types will return an application/octet-stream of doubles describing the noise. Supported image types are image/bmp, image/png, image/jpeg. Calling with 'lakes' will return a stream of lake data. Default value 'data'.
+
+### GET /api/basic_map
+
+Gets a basic map that combines the image results of the biomes and rivers endpoints. Does not have a raw data return option.
+
+**Optional Parameters**
+
+x int : X-coordinate of top-left corner of noise. Default value 0
+
+y int : Y-coordinate of top-left corner of noise. Default value 0
+
+width int : Width of noise in pixels. Default value 500
+
+height int : Height of noise in pixels. Default value 500
+
+seed string : Noise randomness seed. Default value 'seed'
+
+type string : Mime type of image to return. Type must be url encoded as a parameter, replacing '/' with '%2F'. Supported image types are image/bmp, image/png, image/jpeg. Default value 'image/png'.
