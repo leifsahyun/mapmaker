@@ -84,6 +84,10 @@ seed string : Noise randomness seed. Default value 'seed'
 
 type string : Mime type of image to return. Type must be url encoded as a parameter, replacing '/' with '%2F'. 'data', 'buffer' or unsupported types will return an application/octet-stream of doubles describing the noise. Supported image types are image/bmp, image/png, image/jpeg. Calling with 'lakes' will return a stream of lake data. Default value 'data'.
 
+wetness double : How much average rain there is on the map. Default value 1
+
+flowFactor double : How easily water flows. A low number will give lots of small lakes. Higher numbers will give fewer larger rivers. Default value 3
+
 ### GET /api/basic_map
 
 Gets a basic map that combines the image results of the biomes and rivers endpoints. Does not have a raw data return option.

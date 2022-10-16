@@ -70,8 +70,6 @@ function colMajorArrayToRowMajorBuffer(data, bytesPerItem, fillFunction)
 	var buf = colMajorSourceToRowMajorBuffer(width, height, bytesPerItem, (buf, idx, i, j) =>
 	{
 		var value = data[i][j];
-		if (value < 0 || value > 1)
-			throw 'Expected all array values to be in range [0,1]'
 		fillFunction(buf, idx, value);
 	});
 	return buf;

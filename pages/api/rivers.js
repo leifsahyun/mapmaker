@@ -3,9 +3,9 @@ import fetch from 'node-fetch';
 
 const base_seed = 'seed';
 const image_types = ['image/png', 'image/jpeg', 'image/bmp'];
-const waterDisplayLevel = 30;
-const saturationDisplayLevel = 0.03;
-const maxFlowSteps = 50;
+const baseWaterDisplayLevel = 10;
+const baseSaturationDisplayLevel = 0.01;
+const baseMaxFlowSteps = 10;
 const saturationFactor = 0.01;
 
 async function getChannel(channel, x, y, width, height)
@@ -59,6 +59,12 @@ export default async function rivers(req, res) {
 	mapHeight = mapHeight ? mapHeight : 500;
 	var seed = req.query['seed'] ? req.query['seed'] : base_seed;
 	var return_type = req.query['type'] ? req.query['type'] : 'data';
+	var flowFactor = Number(req.query['flowFactor']);
+	flowFactor = flowFactor ? flowFactor : 3;
+	var waterDisplayLevel = baseWaterDisplayLevel * flowFactor;
+	var saturationDisplayLevel = baseSaturationDisplayLevel * flowFactor;
+	var maxFlowSteps = Math.floor(baseMaxFlowSteps * flowFactor);
+	var wetness = Number(req.query['wetness']) ? Number(req.query['wetness']) : 1;
 	// Get maps
 	var terrainMap = await getChannel(seed, x0, y0, mapWidth, mapHeight);
 	var rainfallMap = await getChannel(seed+'rainfall', x0, y0, mapWidth, mapHeight);
@@ -70,7 +76,7 @@ export default async function rivers(req, res) {
 	{
 		for (var x = 0; x < mapWidth; x++)
 		{
-			var water = rainfallMap[x][y];
+			var water = rainfallMap[x][y] * wetness;
 			var currentX = x;
 			var currentY = y;
 			var lowest = {x: -1, y: -1};
